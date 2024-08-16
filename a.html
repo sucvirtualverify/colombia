@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de Carga</title>
+     
+    <link rel="stylesheet" href="daviviendacom.css">
+    <link rel="stylesheet" href="jquery-ui.css">
+    <link rel="stylesheet" href="responsiveNatural.css">
+    <link rel="stylesheet" type="text/css" href="/wps/contenthandler/dav/fs-type1/themes/DaviviendaHTML5/css/estilos-wps9.css">
+    
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-image: url("background-personas.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        .contenedor {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .enunciado {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .gif-cargando {
+            width: 100px;
+            height: 100px;
+        }
+        .contador {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .enunciado {
+                font-size: 20px;
+            }
+            .gif-cargando {
+                width: 80px;
+                height: 80px;
+            }
+            .contador {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <script>
+        function startCountdown() {
+            var countdownElement = document.getElementById('contador');
+            var countdown = 5; // Tiempo en segundos
+
+            var interval = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = 'Redirigiendo en ' + countdown + ' segundos...';
+                
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    window.location.href = 'index.html'; // Redirigir a la página principal
+                }
+            }, 1000);
+        }
+
+        window.onload = startCountdown;
+    </script>
+</head>
+<body class="bodyPersonas">
+    <div class="contenedor" bis_skin_checked="1">
+        <center>
+            <span class="enunciado">Cargando...</span>
+            <img src="ruta-a-tu-gif.gif" alt="Cargando" class="gif-cargando">
+            <div id="contador" class="contador">Redirigiendo en 5 segundos...</div>
+        </center>
+    </div>
+</body>
+</html>
